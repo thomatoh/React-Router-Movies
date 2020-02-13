@@ -16,7 +16,7 @@ const Movie = (props) => {
         .catch(error => {
           console.error(error);
         });
-  },[]);
+  },[props.match.params.id]);
   
   const saveMovie = () => {
     const addToSavedList = props.addToSavedList;
