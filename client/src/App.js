@@ -10,14 +10,19 @@ const App = () => {
   const [savedList, setSavedList] = useState( [] );
 
   const addToSavedList = movie => {
-    setSavedList( [...savedList, movie] );
+    if (!savedList.includes(movie)) {
+      setSavedList( [...savedList, movie] )
+    } else {
+      setSavedList(savedList.filter((movieToRemove) => movieToRemove.id  !== movie.id))
+    }
+ 
   };
 
   return (
     <div>
       <SavedList list={savedList} />
-      <Route exact path="/" component={MovieList} />
-      <Route path="/movies/:id" component={Movie} />
+      <Route exact path="/" component={MovieList}  />
+      <Route path="/movies/:id" render={(props) => <Movie {...props} addToSavedList={addToSavedList} />} />
     </div>
   );
 };
